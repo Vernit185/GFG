@@ -1,0 +1,254 @@
+.about-page {
+  padding-top: var(--nav-height);
+}
+
+.about-header-section {
+  padding: 3.5rem 0 2.5rem;
+  background: radial-gradient(circle at 50% 10%, rgba(47, 158, 68, 0.05) 0%, transparent 70%);
+}
+
+.about-main-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0.8rem 0 0.5rem;
+}
+
+.about-header-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.about-content-section {
+  padding: 2.5rem 0 5rem;
+}
+
+.about-layout-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* Sticky left column */
+.about-sticky-column {
+  position: sticky;
+  top: calc(var(--nav-height) + 1.5rem);
+}
+
+.vision-mission-card {
+  padding: 2.2rem;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-top-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-green) 0%, #06b6d4 100%);
+}
+
+.vm-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.vm-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.vm-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.vm-header h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.vm-text {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.vm-divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 1.8rem 0;
+}
+
+.vm-highlights {
+  margin-top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.highlight-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-green-dark);
+}
+
+.highlight-pill i {
+  font-size: 1.1rem;
+  color: var(--primary-green);
+}
+
+.vm-action {
+  margin-top: 2rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Right column: Domains list */
+.domains-heading-wrapper {
+  margin-bottom: 2rem;
+}
+
+.domains-section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0.5rem 0 0.4rem;
+  letter-spacing: -0.01em;
+}
+
+.domains-section-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 650px;
+}
+
+.domains-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.domain-card {
+  padding: 2.2rem;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.domain-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(47, 158, 68, 0.4);
+}
+
+.domain-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.domain-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.domain-header-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.domain-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  border: 1px solid;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.domain-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.domain-description {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.activities-heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+}
+
+.activities-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.activities-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.925rem;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.activities-list li i {
+  font-size: 1.15rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 992px) {
+  .about-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about-sticky-column {
+    position: static;
+  }
+}
