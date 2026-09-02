@@ -91,7 +91,7 @@ export default function Navbar() {
             <i className="bx bx-envelope"></i> CONTACT
           </NavLink>
           <NavLink to="/hackmatrix" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
-            <i className="bx bx-code-block"></i> HACK MATRIX 4.0
+            <i className="bx bx-code-block"></i> HACK MATRIX
           </NavLink>
         </nav>
       </div>
