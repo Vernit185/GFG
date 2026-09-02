@@ -1,161 +1,93 @@
-# 🌐 GeeksforGeeks Campus Body — PCCOE Website
+# GeeksforGeeks Student Chapter — PCCOE
 
-[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat-square&logo=react&logoColor=black)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![React Router](https://img.shields.io/badge/React_Router-6.28-CA4245?style=flat-square&logo=react-router&logoColor=white)](https://reactrouter.com/)
-[![License](https://img.shields.io/badge/License-MIT-2F9E44?style=flat-square)](LICENSE)
-
-The official web portal for the **GeeksforGeeks Student Chapter at Pimpri Chinchwad College of Engineering (PCCOE)**. Recreated with a modern responsive design system, smooth animations, interactive components, and comprehensive event portals.
+Official web application for the GeeksforGeeks Student Chapter at Pimpri Chinchwad College of Engineering (PCCOE), Pune.
 
 ---
 
-## ✨ Features & Pages
+## Tech Stack
 
-- **🏠 Home Page (`/`)**:
-  - Hero banner with chapter tagline *"Sculpting Tomorrow's Coders!"* and live statistics.
-  - Interactive syntax-highlighted code demo window (`gfg_pccoe_core.cpp`).
-  - Featured felicitation carousel (Mr. Sandeep Jain & Dr. Shitalkumar Rawandale).
-  - Dark announcement card with pulsing animations.
-  - 4-pillar overview (*Competitive Programming, Hackathons, Workshops, Community Outreach*).
-
-- **📖 About Us (`/about`)**:
-  - Left sticky card featuring the chapter's Vision, Mission, and impact metrics.
-  - 4 Domain breakdown cards (*Programming & Coding Competition, Technical Workshops & Training, Industry Interaction & Guest Lectures, Technical Outreach & Community Engagement*).
-
-- **👥 Team (`/team`)**:
-  - Category filtering (*All, Leadership, Technical, Creative & Marketing*).
-  - Member profile cards with roles, departments, taglines, and social media handles (LinkedIn, GitHub, Instagram).
-
-- **🖼️ Gallery (`/gallery`)**:
-  - Event photo showcase categorized by *Special Events, Hackathons, Workshops, Competitions, Seminars, and Community*.
-  - Interactive modal lightbox preview with details and captions.
-
-- **📬 Contact (`/contact`)**:
-  - Branded social channel cards (LinkedIn, Instagram, Twitter/X, YouTube).
-  - Embedded Google Map for the PCCOE Akurdi campus.
-  - Interactive direct message form with validation and animated feedback.
-
-- **⚡ Hack Matrix 4.0 (`/hackmatrix`)**:
-  - Flagship 24-hour offline hackathon portal under ARTIMAS 2026.
-  - Live stats: 100+ Teams, 380+ Participants, 5 Tracks, ₹75,000+ Prize Pool.
-  - Interactive Round-2 results modal with instant search.
-  - Track breakdowns, sponsor showcases, and collapsible FAQ accordion.
-
-- **🎨 Design System**:
-  - Google Fonts (`Outfit`, `Inter`, `Fira Code`).
-  - Boxicons iconography.
-  - Glassmorphism, tailored GFG emerald accents (`#2F9E44`), and glowing edge borders.
-  - Fully responsive across Desktop, Tablet, and Mobile viewports.
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React 18
-- **Tooling & Build**: Vite 6
+- **Framework**: React 18
+- **Build Tool**: Vite
 - **Routing**: React Router DOM (v6)
-- **Styling**: Vanilla CSS with modern CSS variables & design tokens
-- **Icons**: Boxicons & Lucide React
+- **Styling**: Vanilla CSS (CSS variables, responsive grid, glassmorphism)
+- **Icons**: Boxicons
+- **Carousel**: Embla Carousel React
 
 ---
 
-## 🚀 Getting Started
+## Project Structure
+
+```text
+├── public/                # Static assets, logos, and illustrations
+├── src/
+│   ├── components/        # Reusable UI components (Navbar, Footer, Antigravity, SplashScreen)
+│   │   └── ui/            # Generic primitives (Carousel, etc.)
+│   ├── data/              # Static content & dataset models (eventsData, teamData, hackmatrixData, galleryData)
+│   ├── pages/             # Route views
+│   │   ├── Home.jsx       # Landing page & featured highlights
+│   │   ├── About.jsx      # Chapter overview & domain verticals
+│   │   ├── Team.jsx       # Core team directory with category filters
+│   │   ├── Events.jsx     # Upcoming workshops & past event timelines
+│   │   ├── Contact.jsx    # Inquiry form & campus location
+│   │   └── HackMatrix.jsx # Hack Matrix hackathon portal & results
+│   ├── App.jsx            # App shell, routing, and background effects
+│   ├── main.jsx           # Entry point
+│   └── index.css          # Global typography, color tokens, and utility classes
+├── index.html             # HTML entry point with SEO metadata
+├── package.json           # Dependencies and scripts
+└── vite.config.js         # Vite configuration
+```
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
-Ensure you have [Node.js](https://nodejs.org/) (version 18 or above) installed on your system.
+- [Node.js](https://nodejs.org/) (version 18 or higher recommended)
+- npm or yarn
 
 ### Installation
 
-1. **Clone the repository**:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/gfg-pccoe-website.git
+   git clone https://github.com/your-org/gfg-pccoe-website.git
    cd gfg-pccoe-website
    ```
 
-2. **Install dependencies**:
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-3. **Start the local development server**:
+3. Start the development server:
    ```bash
    npm run dev
    ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-4. **Build for production**:
-   ```bash
-   npm run build
-   ```
-
-5. **Preview production build**:
-   ```bash
-   npm run preview
-   ```
+   The site will be available at `http://localhost:3000`.
 
 ---
 
-## 📁 Project Structure
+## Available Scripts
 
-```
-gfg-pccoe-website/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── Navbar.jsx
-│   │   ├── Navbar.css
-│   │   ├── Footer.jsx
-│   │   └── Footer.css
-│   ├── data/
-│   │   ├── teamData.js
-│   │   ├── galleryData.js
-│   │   └── hackmatrixData.js
-│   ├── pages/
-│   │   ├── Home.jsx
-│   │   ├── Home.css
-│   │   ├── About.jsx
-│   │   ├── About.css
-│   │   ├── Team.jsx
-│   │   ├── Team.css
-│   │   ├── Gallery.jsx
-│   │   ├── Gallery.css
-│   │   ├── Contact.jsx
-│   │   ├── Contact.css
-│   │   ├── HackMatrix.jsx
-│   │   └── HackMatrix.css
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── index.html
-├── package.json
-├── vite.config.js
-├── .gitignore
-└── README.md
-```
+- `npm run dev` — Starts the local development server with HMR.
+- `npm run build` — Compiles and minifies the application for production in `dist/`.
+- `npm run preview` — Locally previews the production build.
 
 ---
 
-## 🚢 Deployment
+## Managing Content
 
-You can easily deploy this Vite React application to platforms like **Vercel**, **Netlify**, or **GitHub Pages**:
+All dynamic page data is structured in the `src/data/` folder for maintainability:
 
-### Deploying to Vercel
-1. Push your repository to GitHub.
-2. Go to [Vercel](https://vercel.com/) and click **Add New Project**.
-3. Import your GitHub repository.
-4. Framework preset will automatically detect **Vite**.
-5. Click **Deploy**.
+- **Events & Highlights**: Update `src/data/eventsData.js` to add upcoming events or append highlight carousel images.
+- **Team Members**: Update `src/data/teamData.js` to modify core team profiles, social links, and roles.
+- **Hack Matrix**: Update `src/data/hackmatrixData.js` for hackathon announcements, tracks, FAQs, and round results.
 
 ---
 
-## 📄 License
+## License & Copyright
 
-This project is open-source and available under the [MIT License](LICENSE).
+© 2026 GeeksforGeeks Student Chapter — PCCOE. All Rights Reserved.
 
----
-
-## 🤝 Acknowledgements
-
-- **GeeksforGeeks Campus Body — PCCOE**
-- **Pimpri Chinchwad College of Engineering (PCCOE), Pune**
+This repository and its contents (including source code, design assets, branding, logos, event data, and media) are the intellectual property of the GeeksforGeeks Student Chapter at Pimpri Chinchwad College of Engineering (PCCOE). Unauthorized copying, distribution, modification, or commercial use of any part of this project without prior written permission is strictly prohibited.
