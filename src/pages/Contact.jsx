@@ -51,7 +51,7 @@ export default function Contact() {
             Want to know more about <span className="text-highlight">GeeksforGeeks PCCOE</span>?
           </h1>
           <p className="contact-header-desc">
-            Follow us on our official handles to stay up to date with ongoing hackathons, 
+            Follow us on our official handles to stay up to date with ongoing hackathons,
             workshops, recruitment drives, and student achievements.
           </p>
         </div>
@@ -60,17 +60,17 @@ export default function Contact() {
       {/* Social Handles & Map Section */}
       <section className="contact-channels-section">
         <div className="container channels-grid">
-          
+
           {/* Left: Social Cards */}
           <div className="social-cards-wrapper">
             <h2 className="channel-title">Connect on Social Platforms</h2>
             <p className="channel-subtitle">Join thousands of PCCOE students in our active coding groups.</p>
-            
+
             <div className="social-links-stack">
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-card linkedin-card"
               >
                 <div className="channel-icon-circle">
@@ -83,10 +83,10 @@ export default function Contact() {
                 <i className="bx bx-link-external channel-arrow"></i>
               </a>
 
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-card instagram-card"
               >
                 <div className="channel-icon-circle">
@@ -99,10 +99,10 @@ export default function Contact() {
                 <i className="bx bx-link-external channel-arrow"></i>
               </a>
 
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-card twitter-card"
               >
                 <div className="channel-icon-circle">
@@ -115,10 +115,10 @@ export default function Contact() {
                 <i className="bx bx-link-external channel-arrow"></i>
               </a>
 
-              <a 
-                href="https://youtube.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-card youtube-card"
               >
                 <div className="channel-icon-circle">
@@ -137,7 +137,7 @@ export default function Contact() {
           <div className="map-wrapper glass-card">
             <div className="map-header">
               <div className="map-header-icon">
-                <i className="bx bx-map-pin"></i>
+                <img src="/direction.png" alt="Direction" />
               </div>
               <div>
                 <h3>Our Campus Location</h3>
@@ -169,7 +169,7 @@ export default function Contact() {
               <span className="badge-green">Direct Message</span>
               <h2 className="form-title">Connect with Us: Your Thoughts Matter!</h2>
               <p className="form-desc">
-                Have a question about Hack Matrix, sponsorship opportunities, or domain inductions? 
+                Have a question about Hack Matrix, sponsorship opportunities, or domain inductions?
                 Send us a message and our team will get back to you promptly.
               </p>
             </div>

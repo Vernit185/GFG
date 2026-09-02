@@ -1,0 +1,120 @@
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #ffffff;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+  pointer-events: all;
+}
+
+.splash-overlay.splash-fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: splashEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.splash-logo-wrapper {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: splashLogoFloat 1.8s ease-in-out infinite alternate;
+}
+
+.splash-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.06));
+}
+
+.splash-brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.splash-title {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary-green, #00895f);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 0.25rem;
+}
+
+.splash-subtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.splash-progress-bar {
+  width: 140px;
+  height: 3px;
+  background: #f1f5f9;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.splash-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary-green, #00895f);
+  border-radius: 9999px;
+  animation: splashProgress 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes splashEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes splashLogoFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes splashProgress {
+  0% {
+    width: 0%;
+  }
+  40% {
+    width: 65%;
+  }
+  100% {
+    width: 100%;
+  }
+}
