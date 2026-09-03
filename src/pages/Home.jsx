@@ -75,70 +75,20 @@ export default function Home() {
               <CarouselContent>
                 {galleryPhotos.map((photo) => (
                   <CarouselItem key={photo.id}>
-                    <div
-                      style={{
-                        position: 'relative',
-                        aspectRatio: '16 / 9',
-                        maxHeight: '640px',
-                        width: '100%',
-                        borderRadius: 'var(--radius-lg)',
-                        overflow: 'hidden',
-                        boxShadow: 'var(--shadow-xl)',
-                        border: '1px solid var(--border-light)',
-                        background: '#0f172a'
-                      }}
-                    >
+                    <div className="home-carousel-card">
                       <img
                         src={photo.image}
                         alt={photo.title}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          display: 'block'
-                        }}
+                        className="home-carousel-img"
                       />
-                      <div
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          background: 'linear-gradient(to top, rgba(10, 15, 30, 0.9) 0%, rgba(10, 15, 30, 0.3) 50%, transparent 100%)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'flex-end',
-                          padding: '3rem'
-                        }}
-                      >
-                        <span
-                          className="badge-green"
-                          style={{
-                            color: '#4ade80',
-                            marginBottom: '0.6rem',
-                            display: 'inline-block'
-                          }}
-                        >
+                      <div className="home-carousel-overlay">
+                        <span className="badge-green home-carousel-badge">
                           {photo.category} • {photo.date}
                         </span>
-                        <h3
-                          style={{
-                            fontSize: '2rem',
-                            fontWeight: 700,
-                            color: '#ffffff',
-                            marginBottom: '0.6rem',
-                            letterSpacing: '-0.01em'
-                          }}
-                        >
+                        <h3 className="home-carousel-title">
                           {photo.title}
                         </h3>
-                        <p
-                          style={{
-                            color: '#cbd5e1',
-                            fontSize: '1.1rem',
-                            maxWidth: '850px',
-                            lineHeight: 1.6,
-                            margin: 0
-                          }}
-                        >
+                        <p className="home-carousel-desc">
                           {photo.description}
                         </p>
                       </div>

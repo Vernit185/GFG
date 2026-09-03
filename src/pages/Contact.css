@@ -4,7 +4,6 @@
 
 .contact-header-section {
   padding: 3.5rem 0 2rem;
-  background: radial-gradient(circle at 50% 10%, rgba(47, 158, 68, 0.05) 0%, transparent 70%);
 }
 
 .contact-main-title {
@@ -80,10 +79,21 @@
   flex-shrink: 0;
 }
 
-.linkedin-card .channel-icon-circle { background: #0077b5; }
-.instagram-card .channel-icon-circle { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.twitter-card .channel-icon-circle { background: #1da1f2; }
-.youtube-card .channel-icon-circle { background: #ff0000; }
+.linkedin-card .channel-icon-circle {
+  background: #0077b5;
+}
+
+.instagram-card .channel-icon-circle {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.twitter-card .channel-icon-circle {
+  background: #1da1f2;
+}
+
+.youtube-card .channel-icon-circle {
+  background: #ff0000;
+}
 
 .channel-info {
   flex-grow: 1;
@@ -186,6 +196,7 @@
   font-size: 2.2rem;
   font-weight: 800;
   margin: 0.8rem 0 0.5rem;
+  text-align: center;
 }
 
 .form-desc {
@@ -281,10 +292,31 @@
   .channels-grid {
     grid-template-columns: 1fr;
   }
+
   .form-row {
     grid-template-columns: 1fr;
   }
+
   .form-card {
     padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-main-title {
+    font-size: 2.2rem;
+  }
+
+  .contact-header-section {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .form-title {
+    font-size: 1.8rem;
+  }
+
+  .form-submit-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

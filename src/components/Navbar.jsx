@@ -55,9 +55,9 @@ export default function Navbar() {
           <NavLink to="/contact" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
             CONTACT
           </NavLink>
-          <NavLink to="/hackmatrix" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            HACK MATRIX
-          </NavLink>
+          <a href="https://hackmatrix.pccoeaimsa.in" target="_blank" rel="noopener noreferrer" className="nav-item">
+            HACK MATRIX <i className="bx bx-link-external" style={{ fontSize: '0.85em', marginLeft: '4px' }}></i>
+          </a>
         </nav>
 
         {/* Mobile Hamburger Toggle */}
@@ -90,9 +90,9 @@ export default function Navbar() {
           <NavLink to="/contact" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
             <i className="bx bx-envelope"></i> CONTACT
           </NavLink>
-          <NavLink to="/hackmatrix" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
-            <i className="bx bx-code-block"></i> HACK MATRIX
-          </NavLink>
+          <a href="https://hackmatrix.pccoeaimsa.in" target="_blank" rel="noopener noreferrer" className="mobile-nav-item">
+            <i className="bx bx-code-block"></i> HACK MATRIX <i className="bx bx-link-external" style={{ fontSize: '0.85em', marginLeft: '4px' }}></i>
+          </a>
         </nav>
       </div>
     </header>

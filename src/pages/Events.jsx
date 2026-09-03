@@ -1,11 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { upcomingEvents, pastHighlights } from '../data/eventsData';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '../components/ui/carousel';
 import './Events.css';
 
 export default function Events() {
+  const [lightboxData, setLightboxData] = useState(null);
+
+  React.useEffect(() => {
+    if (lightboxData) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [lightboxData]);
+
+  const openLightbox = (highlight, startIndex) => {
+    setLightboxData({ highlight, startIndex });
+  };
+
+  const closeLightbox = () => {
+    setLightboxData(null);
+  };
+
+  // Render the lightbox directly into the body to prevent CSS transform conflicts
+  const renderLightbox = () => {
+    if (!lightboxData) return null;
+    return createPortal(
+      <div className="lightbox-overlay" onClick={closeLightbox}>
+        <button className="lightbox-close" onClick={closeLightbox}>
+          <i className="bx bx-x"></i>
+        </button>
+        <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+          <Carousel 
+            opts={{ startIndex: lightboxData.startIndex, loop: true }}
+            className="lightbox-carousel"
+          >
+            <CarouselContent>
+              {lightboxData.highlight.images.map((img, idx) => (
+                <CarouselItem key={idx}>
+                  <img src={img.src} alt={img.alt} className="lightbox-img" />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="lightbox-controls-bar">
+              <CarouselPrevious className="lightbox-nav-btn" />
+              <CarouselNext className="lightbox-nav-btn" />
+            </div>
+          </Carousel>
+        </div>
+      </div>,
+      document.body
+    );
+  };
+
   return (
     <div className="events-page animate-fade-in">
+      {renderLightbox()}
+
       {/* Hero Section */}
       <section className="events-hero-section">
         <div className="container events-hero-content">
@@ -62,7 +117,11 @@ export default function Events() {
                       <CarouselContent>
                         {highlight.images.map((img, idx) => (
                           <CarouselItem key={idx} className="event-carousel-slide">
-                            <div className="carousel-img-wrapper soft-bloom">
+                            <div 
+                              className="carousel-img-wrapper soft-bloom" 
+                              onClick={() => openLightbox(highlight, idx)}
+                              style={{ cursor: 'pointer' }}
+                            >
                               <img src={img.src} alt={img.alt} loading="lazy" />
                             </div>
                           </CarouselItem>
