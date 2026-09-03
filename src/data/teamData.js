@@ -35,7 +35,7 @@ export const teamTiers = [
     members: [
       {
         id: 3,
-        name: "Meet Ramjiyani",
+        name: "MEET RAMJIYANI",
         role: "Technical Head",
         department: "Computer Engineering",
         image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=80",

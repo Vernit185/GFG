@@ -31,7 +31,7 @@ export default function Navbar() {
         {/* Brand Logo & Name */}
         <NavLink to="/" className="navbar-brand">
           <div className="brand-logo-wrapper">
-            <img src={gfgEmblem} alt="GeeksforGeeks PCCOE Logo" className="gfg-navbar-logo" />
+            <img src="/logo-small.png" alt="GFG PCCOE" className="navbar-logo-img" />
           </div>
           <div className="brand-text">
             <span className="brand-title">GeeksforGeeks</span>
@@ -50,16 +50,15 @@ export default function Navbar() {
           <NavLink to="/team" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
             TEAM
           </NavLink>
-          <NavLink to="/gallery" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            GALLERY
+          <NavLink to="/events" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+            EVENTS
           </NavLink>
           <NavLink to="/contact" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
             CONTACT
           </NavLink>
-          <NavLink to="/hackmatrix" className={({ isActive }) => `nav-item nav-badge-item ${isActive ? 'active' : ''}`}>
-            <span className="badge-glow-dot"></span>
-            HACK MATRIX
-          </NavLink>
+          <a href="https://hackmatrix.pccoeaimsa.in" target="_blank" rel="noopener noreferrer" className="nav-item">
+            HACK MATRIX <i className="bx bx-link-external" style={{ fontSize: '0.85em', marginLeft: '4px' }}></i>
+          </a>
         </nav>
 
         {/* Mobile Hamburger Toggle */}
@@ -86,15 +85,15 @@ export default function Navbar() {
           <NavLink to="/team" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
             <i className="bx bx-group"></i> TEAM
           </NavLink>
-          <NavLink to="/gallery" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
-            <i className="bx bx-images"></i> GALLERY
+          <NavLink to="/events" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+            <i className="bx bx-calendar-event"></i> EVENTS
           </NavLink>
           <NavLink to="/contact" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
             <i className="bx bx-envelope"></i> CONTACT
           </NavLink>
-          <NavLink to="/hackmatrix" className={({ isActive }) => `mobile-nav-item mobile-badge ${isActive ? 'active' : ''}`}>
-            <i className="bx bx-code-block"></i> HACK MATRIX 4.0
-          </NavLink>
+          <a href="https://hackmatrix.pccoeaimsa.in" target="_blank" rel="noopener noreferrer" className="mobile-nav-item">
+            <i className="bx bx-code-block"></i> HACK MATRIX <i className="bx bx-link-external" style={{ fontSize: '0.85em', marginLeft: '4px' }}></i>
+          </a>
         </nav>
       </div>
     </header>

@@ -1,18 +1,18 @@
 :root {
-  --about-bg: #F6F8F3;
-  --about-surface: #FFFFFF;
+  --about-bg: transparent;
+  --about-surface: rgba(255, 255, 255, 0.85);
   --about-ink: #16233D;
   --about-text: #4B535A;
   --about-text-soft: #74808A;
   --about-green: #1E8F53;
   --about-green-deep: #146B3E;
   --about-blue: #2E8FD9;
-  --about-line: #E2E6DD;
+  --about-line: rgba(226, 230, 221, 0.6);
 }
 
 .about-page-container {
   min-height: 100vh;
-  background: var(--about-bg);
+  background: transparent;
   color: var(--about-text);
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
@@ -77,6 +77,8 @@
   max-width: 420px;
   margin: 0 0 8px 0;
   background: var(--about-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--about-line);
   border-radius: 10px;
   overflow: hidden;
@@ -160,7 +162,9 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--about-surface);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 2px solid var(--about-green);
   display: flex;
   align-items: center;
@@ -176,6 +180,8 @@
 
 .about-page-container .card {
   background: var(--about-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--about-line);
   border-radius: 10px;
   padding: 30px 32px;
@@ -320,7 +326,9 @@
   border: 1px solid var(--about-line);
   border-radius: 999px;
   padding: 10px 22px;
-  background: var(--about-surface);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
   transition: all 0.2s ease;
 }

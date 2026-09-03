@@ -19,26 +19,47 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate sending message
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        subject: '',
-        description: ''
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/geeksforgeeks@pccoepune.org", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: `${formData.firstName} ${formData.lastName}`,
+          Email: formData.email,
+          Phone: formData.phone || "Not provided",
+          Subject: formData.subject,
+          Message: formData.description,
+          _subject: `New Contact Request: ${formData.subject}`
+        })
       });
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 6000);
-    }, 800);
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          subject: '',
+          description: ''
+        });
+        setTimeout(() => setSubmitted(false), 6000);
+      } else {
+        alert("Failed to send message. Please try again later.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred. Please try again or email us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -51,7 +72,7 @@ export default function Contact() {
             Want to know more about <span className="text-highlight">GeeksforGeeks PCCOE</span>?
           </h1>
           <p className="contact-header-desc">
-            Follow us on our official handles to stay up to date with ongoing hackathons, 
+            Follow us on our official handles to stay up to date with ongoing hackathons,
             workshops, recruitment drives, and student achievements.
           </p>
         </div>
@@ -60,17 +81,17 @@ export default function Contact() {
       {/* Social Handles & Map Section */}
       <section className="contact-channels-section">
         <div className="container channels-grid">
-          
+
           {/* Left: Social Cards */}
           <div className="social-cards-wrapper">
             <h2 className="channel-title">Connect on Social Platforms</h2>
             <p className="channel-subtitle">Join thousands of PCCOE students in our active coding groups.</p>
-            
+
             <div className="social-links-stack">
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.linkedin.com/company/gfgpccoe"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-card linkedin-card"
               >
                 <div className="channel-icon-circle">
@@ -78,47 +99,49 @@ export default function Contact() {
                 </div>
                 <div className="channel-info">
                   <h3>LinkedIn Community</h3>
-                  <p>Follow for professional updates, guest speaker sessions, and career wins.</p>
+                  <p>Follow for professional updates.</p>
                 </div>
                 <i className="bx bx-link-external channel-arrow"></i>
               </a>
 
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.instagram.com/gfg_campusbody_pccoe"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-card instagram-card"
               >
                 <div className="channel-icon-circle">
                   <i className="bx bxl-instagram"></i>
                 </div>
                 <div className="channel-info">
-                  <h3>Instagram @gfg_pccoe</h3>
+                  <h3>Instagram @gfg_campusbody_pccoe</h3>
                   <p>Catch daily reels, tech trivia, event countdowns, and behind-the-scenes.</p>
                 </div>
                 <i className="bx bx-link-external channel-arrow"></i>
               </a>
 
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://x.com/gfg_pccoe"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-card twitter-card"
               >
                 <div className="channel-icon-circle">
-                  <i className="bx bxl-twitter"></i>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                  </svg>
                 </div>
                 <div className="channel-info">
-                  <h3>Twitter / X Space</h3>
+                  <h3>X Space / Twitter</h3>
                   <p>Tech threads, developer announcements, and hackathon highlights.</p>
                 </div>
                 <i className="bx bx-link-external channel-arrow"></i>
               </a>
 
-              <a 
-                href="https://youtube.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.youtube.com/@PCCOEGeeksforGeeks"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-card youtube-card"
               >
                 <div className="channel-icon-circle">
@@ -137,7 +160,7 @@ export default function Contact() {
           <div className="map-wrapper glass-card">
             <div className="map-header">
               <div className="map-header-icon">
-                <i className="bx bx-map-pin"></i>
+                <img src="/direction.png" alt="Direction" />
               </div>
               <div>
                 <h3>Our Campus Location</h3>
@@ -169,7 +192,7 @@ export default function Contact() {
               <span className="badge-green">Direct Message</span>
               <h2 className="form-title">Connect with Us: Your Thoughts Matter!</h2>
               <p className="form-desc">
-                Have a question about Hack Matrix, sponsorship opportunities, or domain inductions? 
+                Have a question about Hack Matrix, sponsorship opportunities, or any in general query?
                 Send us a message and our team will get back to you promptly.
               </p>
             </div>
@@ -178,7 +201,7 @@ export default function Contact() {
               <div className="success-banner animate-fade-in">
                 <i className="bx bx-check-circle"></i>
                 <div>
-                  <h4>Message Dispatched Successfully!</h4>
+                  <h4>Message Sent Successfully!</h4>
                   <p>Thank you for writing to GFG PCCOE. Our team will respond to your email within 24 hours.</p>
                 </div>
               </div>
