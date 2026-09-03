@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import gfgEmblem from '../assets/gfg-emblem.png';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -30,10 +31,7 @@ export default function Navbar() {
         {/* Brand Logo & Name */}
         <NavLink to="/" className="navbar-brand">
           <div className="brand-logo-wrapper">
-            <svg className="gfg-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="100" height="100" rx="22" fill="#2F9E44"/>
-              <path d="M35 32 C22 32 20 68 35 68 C45 68 49 59 49 50 L35 50 M65 32 C52 32 50 68 65 68 C75 68 79 59 79 50 L65 50" stroke="#ffffff" strokeWidth="8.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <img src={gfgEmblem} alt="GeeksforGeeks PCCOE Logo" className="gfg-navbar-logo" />
           </div>
           <div className="brand-text">
             <span className="brand-title">GeeksforGeeks</span>

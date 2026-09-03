@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import gfgEmblem from '../assets/gfg-emblem.png';
 import './Footer.css';
 
 export default function Footer() {
@@ -33,7 +34,6 @@ export default function Footer() {
           onClick={scrollToTop}
           aria-label="Back to top"
         >
-          <i className="bx bx-chevron-up"></i>
           <span>Back to Top</span>
         </button>
       </div>
@@ -44,10 +44,7 @@ export default function Footer() {
           <div className="footer-col footer-contact">
             <div className="footer-brand-header">
               <div className="footer-logo-box">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="100" height="100" rx="20" fill="#2F9E44"/>
-                  <path d="M35 32 C22 32 20 68 35 68 C45 68 49 59 49 50 L35 50 M65 32 C52 32 50 68 65 68 C75 68 79 59 79 50 L65 50" stroke="#ffffff" strokeWidth="8.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <img src={gfgEmblem} alt="GeeksforGeeks Logo" className="footer-logo-img" />
               </div>
               <h3 className="footer-title">Contact Us</h3>
             </div>

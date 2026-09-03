@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Agentation } from 'agentation';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -39,6 +40,7 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        {import.meta.env.DEV && <Agentation />}
       </div>
     </Router>
   );

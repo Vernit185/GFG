@@ -1,8 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import GfgIntroLanding from '../components/GfgIntroLanding';
+import gfgEmblem from '../assets/gfg-emblem.png';
 import './Home.css';
 
 export default function Home() {
+  // Shown only once per session / initial visit for 3 seconds
+  const [showIntro, setShowIntro] = useState(() => {
+    try {
+      return !sessionStorage.getItem('has_seen_gfg_intro');
+    } catch {
+      return true;
+    }
+  });
+
+  const [heroCardTilt, setHeroCardTilt] = useState({ x: 0, y: 0 });
+  const [isHeroSpinning, setIsHeroSpinning] = useState(false);
+
+  const handleIntroComplete = () => {
+    try {
+      sessionStorage.setItem('has_seen_gfg_intro', 'true');
+    } catch {
+      // ignore
+    }
+    setShowIntro(false);
+  };
+
   const carouselSlides = [
     {
       id: 1,
@@ -44,26 +67,52 @@ export default function Home() {
     setCurrentSlide((prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length);
   };
 
+  // Interactive 3D Hero Tilt Effect on Mouse Move
+  const handleHeroMouseMove = (e) => {
+    const card = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - card.left) / card.width - 0.5) * 26;
+    const y = ((e.clientY - card.top) / card.height - 0.5) * -26;
+    setHeroCardTilt({ x, y });
+  };
+
+  const handleHeroMouseLeave = () => {
+    setHeroCardTilt({ x: 0, y: 0 });
+  };
+
+  const triggerHeroLogoSpin = () => {
+    setIsHeroSpinning(true);
+    setTimeout(() => {
+      setIsHeroSpinning(false);
+    }, 1800);
+  };
+
   return (
     <div className="home-page animate-fade-in">
-      {/* 1. Hero Section */}
-      <section className="hero-section">
+      {/* 3D Intro & Window Style Entry (3-second one-time auto animation) */}
+      {showIntro && (
+        <GfgIntroLanding onComplete={handleIntroComplete} />
+      )}
+
+      {/* 1. 3D Cyber Hero Section with Black Theme & Glowing Green Logo */}
+      <section className="hero-section hero-3d-cyber">
+        {/* Background Cyber Ambient Elements */}
+        <div className="hero-dark-backdrop">
+          <div className="hero-cyber-grid"></div>
+          <div className="hero-neon-spotlight"></div>
+          <div className="hero-cyber-lines"></div>
+        </div>
+
         <div className="container hero-grid">
           <div className="hero-content">
-            <div className="badge-green badge-glow">
-              <i className="bx bx-terminal"></i>
-              <span>Official Student Chapter</span>
-            </div>
-
-            <h1 className="hero-title">
-              GeeksforGeeks Campus Body <span className="text-highlight">PCCOE</span>
+            <h1 className="hero-title hero-title-3d">
+              GeeksforGeeks Campus Body <span className="text-highlight-3d">PCCOE</span>
             </h1>
 
-            <h2 className="hero-subtitle">
+            <h2 className="hero-subtitle hero-subtitle-glow">
               Sculpting Tomorrow's Coders!
             </h2>
 
-            <p className="hero-description">
+            <p className="hero-description hero-desc-cyber">
               We are a vibrant community of budding programmers and technology enthusiasts from
               <strong> Pimpri Chinchwad College of Engineering (PCCOE)</strong>. We bridge the gap between
               classroom learning and industry excellence through competitive coding, specialized bootcamps,
@@ -71,81 +120,52 @@ export default function Home() {
             </p>
 
             <div className="hero-actions">
-              <Link to="/hackmatrix" className="btn btn-primary">
+              <Link to="/hackmatrix" className="btn btn-hero-hackmatrix">
                 <i className="bx bx-code-block"></i>
                 <span>Explore Hack Matrix 4.0</span>
               </Link>
-              <Link to="/about" className="btn btn-secondary">
-                <i className="bx bx-compass"></i>
-                <span>Our Domains</span>
-              </Link>
-            </div>
-
-            {/* Quick Micro Stats */}
-            <div className="hero-quick-stats">
-              <div className="stat-item">
-                <span className="stat-number">1500+</span>
-                <span className="stat-label">Active Geeks</span>
-              </div>
-              <div className="stat-divider"></div>
-              <div className="stat-item">
-                <span className="stat-number">30+</span>
-                <span className="stat-label">Tech Events</span>
-              </div>
-              <div className="stat-divider"></div>
-              <div className="stat-item">
-                <span className="stat-number">₹75K+</span>
-                <span className="stat-label">Prizes Awarded</span>
-              </div>
             </div>
           </div>
 
-          {/* Hero Visual Card / Interactive Terminal Graphic */}
-          <div className="hero-visual">
-            <div className="code-window glass-card">
-              <div className="code-window-header">
-                <div className="window-dots">
-                  <span className="dot dot-red"></span>
-                  <span className="dot dot-yellow"></span>
-                  <span className="dot dot-green"></span>
+          {/* Hero Visual: 3D Interactive GFG Spinning Emblem */}
+          <div className="hero-visual hero-3d-visual">
+            <div
+              className="hero-3d-interactive-card"
+              onMouseMove={handleHeroMouseMove}
+              onMouseLeave={handleHeroMouseLeave}
+              onClick={triggerHeroLogoSpin}
+              title="Click or hover to interact with 3D GFG Emblem"
+              style={{
+                transform: `perspective(1000px) rotateY(${heroCardTilt.x}deg) rotateX(${heroCardTilt.y}deg)`
+              }}
+            >
+              {/* 3D Glowing Green Backlight Shadow */}
+              <div className="hero-glowing-shadow"></div>
+
+              {/* 3D Rotating Logo Box */}
+              <div className={`hero-logo-box-3d ${isHeroSpinning ? 'manual-spin' : ''}`}>
+                <div className="hero-logo-face hero-face-front">
+                  <img src={gfgEmblem} alt="GeeksforGeeks 3D Emblem" className="hero-gfg-logo-img" />
+                  <div className="hero-card-glare"></div>
                 </div>
-                <div className="window-title">gfg_pccoe_core.cpp</div>
-                <div className="window-badge">v4.0.26</div>
               </div>
 
-              <div className="code-window-body">
-                <pre>
-                  <code>
-                    <span className="code-keyword">#include</span> <span className="code-string">&lt;iostream&gt;</span>{'\n'}
-                    <span className="code-keyword">#include</span> <span className="code-string">&lt;community/pccoe&gt;</span>{'\n'}
-                    {'\n'}
-                    <span className="code-type">class</span> <span className="code-class">GeeksPCCOE</span> {'{'}{'\n'}
-                    <span className="code-keyword">public</span>:{'\n'}
-                    {'  '}<span className="code-type">void</span> <span className="code-func">sculptCoders</span>() {'{'}{'\n'}
-                    {'    '}<span className="code-type">std::vector</span>&lt;<span className="code-type">std::string</span>&gt; domains = {'{'}{'\n'}
-                    {'      '}<span className="code-string">"Competitive Coding"</span>,{'\n'}
-                    {'      '}<span className="code-string">"Hack Matrix 4.0"</span>,{'\n'}
-                    {'      '}<span className="code-string">"Technical Bootcamps"</span>,{'\n'}
-                    {'      '}<span className="code-string">"Industry Mentorship"</span>{'\n'}
-                    {'    '}{'}'};{'\n'}
-                    {'    '}<span className="code-keyword">for</span> (<span className="code-type">auto</span>& domain : domains) {'{'}{'\n'}
-                    {'      '}<span className="code-func">empowerStudents</span>(domain);{'\n'}
-                    {'    '}{'}'}{'\n'}
-                    {'  '}{'}'}{'\n'}
-                    {'}'};
-                  </code>
-                </pre>
+              {/* PCCOE Brand Label Under GFG */}
+              <div className="hero-pccoe-under-gfg">
+                <span className="hero-gfg-brand">GEEKSFORGEEKS</span>
+                <div className="hero-pccoe-glowing-word">PCCOE</div>
+                <span className="hero-sub-tag">CAMPUS BODY • EST. PCCOE PUNE</span>
               </div>
+            </div>
 
-              {/* Floating Highlight Badges */}
-              <div className="floating-badge badge-top-right">
-                <i className="bx bx-check-double text-green"></i>
-                <span>All Test Cases Passed!</span>
-              </div>
-              <div className="floating-badge badge-bottom-left">
-                <i className="bx bx-trophy text-yellow"></i>
-                <span>Hack Matrix 4.0 Live</span>
-              </div>
+            {/* Floating Live Badges */}
+            <div className="floating-badge badge-top-right dark-glass-badge">
+              <i className="bx bx-check-double text-green"></i>
+              <span>All Test Cases Passed!</span>
+            </div>
+            <div className="floating-badge badge-bottom-left dark-glass-badge">
+              <i className="bx bx-trophy text-yellow"></i>
+              <span>Hack Matrix 4.0 Live</span>
             </div>
           </div>
         </div>
