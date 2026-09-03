@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import gfgEmblem from '../assets/gfg-emblem.png';
 import './Navbar.css';
 
 export default function Navbar() {
