@@ -19,7 +19,7 @@ export default function Home() {
         <div className="container hero-centered-container">
           {/* Chapter Official Logo */}
           <div className="hero-logo-wrapper">
-            <img src="/GFG-logo.png" alt="GeeksforGeeks Logo" className="hero-main-logo gfg-logo" />
+            <img src="/gfg-logo.png" alt="GeeksforGeeks Logo" className="hero-main-logo gfg-logo" />
             <span className="hero-logo-cross">X</span>
             <img src="/PCCOE-logo.png" alt="PCCOE Logo" className="hero-main-logo pccoe-logo" />
           </div>

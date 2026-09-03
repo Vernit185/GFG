@@ -35,11 +35,6 @@ export default function Team() {
                   <div key={member.id} className="team-card glass-card">
                     <div className="team-card-image-box">
                       <img src={member.image} alt={member.name} className="team-photo" />
-                      <div className="team-photo-overlay">
-                        <div className="team-avatar-initials" style={{ background: member.avatarBg }}>
-                          {member.initials}
-                        </div>
-                      </div>
                     </div>
 
                     <div className="team-card-info text-center">
