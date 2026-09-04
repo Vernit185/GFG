@@ -225,6 +225,10 @@
   margin-bottom: 1.5rem;
 }
 
+.timeline-item.no-carousel .timeline-title {
+  margin-bottom: 0.5rem;
+}
+
 .timeline-title i {
   color: var(--primary-green);
 }

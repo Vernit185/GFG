@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { upcomingEvents, pastHighlights } from '../data/eventsData';
+import { upcomingEvents, pastHighlights as defaultHighlights } from '../data/eventsData';
+import { useCloudinaryEvents } from '../hooks/useCloudinary';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '../components/ui/carousel';
 import './Events.css';
 
 export default function Events() {
+  const { highlights } = useCloudinaryEvents(defaultHighlights);
   const [lightboxData, setLightboxData] = useState(null);
 
   React.useEffect(() => {
@@ -105,33 +107,38 @@ export default function Events() {
           <h2 className="events-section-title section-title-border">Past Highlights</h2>
           <div className="timeline-container glass-card">
             <div className="timeline-track">
-              {pastHighlights.map((highlight) => (
-                <div key={highlight.id} className="timeline-item">
+              {highlights.map((highlight) => (
+                <div 
+                  key={highlight.id} 
+                  className={`timeline-item ${highlight.images && highlight.images.length > 0 ? 'has-carousel' : 'no-carousel'}`}
+                >
                   <div className="timeline-dot"></div>
                   <div className="timeline-content">
                     <span className="timeline-date">{highlight.date}</span>
                     <h3 className="timeline-title">
                       {highlight.title}
                     </h3>
-                    <Carousel className="events-carousel" opts={{ align: "start" }}>
-                      <CarouselContent>
-                        {highlight.images.map((img, idx) => (
-                          <CarouselItem key={idx} className="event-carousel-slide">
-                            <div 
-                              className="carousel-img-wrapper soft-bloom" 
-                              onClick={() => openLightbox(highlight, idx)}
-                              style={{ cursor: 'pointer' }}
-                            >
-                              <img src={img.src} alt={img.alt} loading="lazy" />
-                            </div>
-                          </CarouselItem>
-                        ))}
-                      </CarouselContent>
-                      <div className="carousel-controls-bar">
-                        <CarouselPrevious />
-                        <CarouselNext />
-                      </div>
-                    </Carousel>
+                    {highlight.images && highlight.images.length > 0 && (
+                      <Carousel className="events-carousel" opts={{ align: "start" }}>
+                        <CarouselContent>
+                          {highlight.images.map((img, idx) => (
+                            <CarouselItem key={idx} className="event-carousel-slide">
+                              <div 
+                                className="carousel-img-wrapper soft-bloom" 
+                                onClick={() => openLightbox(highlight, idx)}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <img src={img.src} alt={img.alt} loading="lazy" />
+                              </div>
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        <div className="carousel-controls-bar">
+                          <CarouselPrevious />
+                          <CarouselNext />
+                        </div>
+                      </Carousel>
+                    )}
                   </div>
                 </div>
               ))}

@@ -1,19 +1,40 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { aboutAssets } from '../data/aboutData';
 import './ClassroomVideo.css';
 
-export default function ClassroomVideo({ cardRef }) {
+export default function ClassroomVideo({ cardRef, src, alt = 'Domain visual' }) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const [isNear, setIsNear] = useState(false);
 
+  const isImage = typeof src === 'string' && (
+    src.match(/\.(gif|webp|png|jpe?g)($|\?)/i) || 
+    src.includes('/image/upload/')
+  );
+
   useEffect(() => {
+    if (isImage) return;
     const video = videoRef.current;
     if (!video) return;
 
-    // Ensure it starts paused on the first frame (static)
+    // Ensure it starts paused on the first frame
     video.pause();
 
-    const PROXIMITY_THRESHOLD = 200;
+    const PROXIMITY_THRESHOLD = 260;
+
+    const playVideo = () => {
+      setIsNear(true);
+      if (videoRef.current && videoRef.current.paused) {
+        videoRef.current.play().catch(() => {});
+      }
+    };
+
+    const pauseVideo = () => {
+      setIsNear(false);
+      if (videoRef.current && !videoRef.current.paused) {
+        videoRef.current.pause();
+      }
+    };
 
     const handlePointerMove = (e) => {
       const cardEl = cardRef?.current;
@@ -40,38 +61,63 @@ export default function ClassroomVideo({ cardRef }) {
         }
       }
 
-      const shouldPlay = nearCard || nearVideo;
-
-      if (shouldPlay) {
-        setIsNear(true);
-        if (videoRef.current.paused) {
-          videoRef.current.play().catch(() => { });
-        }
+      if (nearCard || nearVideo) {
+        playVideo();
       } else {
-        setIsNear(false);
-        if (!videoRef.current.paused) {
-          videoRef.current.pause();
-        }
+        pauseVideo();
       }
     };
 
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
 
+    // Direct card hover support
+    const cardEl = cardRef?.current;
+    if (cardEl) {
+      cardEl.addEventListener('mouseenter', playVideo);
+      cardEl.addEventListener('mouseleave', pauseVideo);
+    }
+
+    // Touch / scroll support via IntersectionObserver
+    let observer = null;
+    const videoEl = containerRef.current;
+    if ('IntersectionObserver' in window && videoEl) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // On touch/mobile devices where pointermove isn't continuous
+          if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+              playVideo();
+            } else {
+              pauseVideo();
+            }
+          }
+        });
+      }, { threshold: [0, 0.5, 1] });
+      observer.observe(videoEl);
+    }
+
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
+      if (cardEl) {
+        cardEl.removeEventListener('mouseenter', playVideo);
+        cardEl.removeEventListener('mouseleave', pauseVideo);
+      }
+      if (observer) {
+        observer.disconnect();
+      }
     };
-  }, [cardRef]);
+  }, [cardRef, isImage, src]);
 
   const handleMouseEnter = () => {
     setIsNear(true);
-    if (videoRef.current && videoRef.current.paused) {
-      videoRef.current.play().catch(() => { });
+    if (!isImage && videoRef.current && videoRef.current.paused) {
+      videoRef.current.play().catch(() => {});
     }
   };
 
   const handleMouseLeave = () => {
     setIsNear(false);
-    if (videoRef.current && !videoRef.current.paused) {
+    if (!isImage && videoRef.current && !videoRef.current.paused) {
       videoRef.current.pause();
     }
   };
@@ -84,15 +130,24 @@ export default function ClassroomVideo({ cardRef }) {
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleMouseEnter}
     >
-      <video
-        ref={videoRef}
-        src="/clsroom.mp4"
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="classroom-video-media"
-      />
+      {isImage ? (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="classroom-video-media"
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          src={src || aboutAssets?.classroomVideo || 'https://res.cloudinary.com/dvkwaq6y/video/upload/v1788506283/clsroom.mp4'}
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="classroom-video-media"
+        />
+      )}
     </div>
   );
 }

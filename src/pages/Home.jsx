@@ -9,9 +9,12 @@ import {
 } from '../components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { galleryPhotos } from '../data/galleryData';
+import { homeCarouselConfig } from '../data/galleryConfig';
+import { useCloudinaryHome } from '../hooks/useCloudinary';
 import './Home.css';
 
 export default function Home() {
+  const { photos } = useCloudinaryHome(galleryPhotos);
   return (
     <div className="home-page animate-fade-in">
       {/* 1. Hero Section (Centered Layout) */}
@@ -47,63 +50,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. Featured Photo Carousel (Enlarged Section) */}
-      <section className="carousel-section">
-        <div className="container">
-          <div className="section-header text-center">
-            <span className="badge-green">Moments of Pride</span>
-            <h2 className="section-heading">Featured Highlights & Felicitation</h2>
-            <p className="section-subheading">
-              Memorable milestones that define the spirit of innovation at GeeksforGeeks PCCOE.
-            </p>
-          </div>
+      {/* 2. Featured Photo Carousel (Enlarged Section - Dynamic from Cloudinary) */}
+      {photos && photos.length > 0 && (
+        <section className="carousel-section">
+          <div className="container">
+            <div className="section-header text-center">
+              <span className="badge-green">Moments of Pride</span>
+              <h2 className="section-heading">Featured Highlights & Felicitation</h2>
+              <p className="section-subheading">
+                Memorable milestones that define the spirit of innovation at GeeksforGeeks PCCOE.
+              </p>
+            </div>
 
-          <div style={{ maxWidth: '1240px', margin: '2.5rem auto 0' }}>
-            <Carousel
-              opts={{
-                align: 'start',
-                loop: true
-              }}
-              plugins={[
-                Autoplay({
-                  delay: 3500,
-                  stopOnInteraction: true
-                })
-              ]}
-              className="w-full"
-            >
-              <CarouselContent>
-                {galleryPhotos.map((photo) => (
-                  <CarouselItem key={photo.id}>
-                    <div className="home-carousel-card">
-                      <img
-                        src={photo.image}
-                        alt={photo.title}
-                        className="home-carousel-img"
-                      />
-                      <div className="home-carousel-overlay">
-                        <span className="badge-green home-carousel-badge">
-                          {photo.category} • {photo.date}
-                        </span>
-                        <h3 className="home-carousel-title">
-                          {photo.title}
-                        </h3>
-                        <p className="home-carousel-desc">
-                          {photo.description}
-                        </p>
+            <div style={{ maxWidth: '1240px', margin: '2.5rem auto 0' }}>
+              <Carousel
+                opts={{
+                  align: 'start',
+                  loop: true
+                }}
+                plugins={[
+                  Autoplay({
+                    delay: 3500,
+                    stopOnInteraction: true
+                  })
+                ]}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {photos.map((photo) => (
+                    <CarouselItem key={photo.id}>
+                      <div className="home-carousel-card">
+                        <img
+                          src={photo.image}
+                          alt={photo.title}
+                          className="home-carousel-img"
+                        />
+                        <div className="home-carousel-overlay">
+                          <span className="badge-green home-carousel-badge">
+                            {photo.category || homeCarouselConfig.category || 'Featured'} • {photo.date || homeCarouselConfig.dateText || `${homeCarouselConfig.month} ${homeCarouselConfig.year}`}
+                          </span>
+                          <h3 className="home-carousel-title">
+                            {photo.title}
+                          </h3>
+                          {photo.description && (
+                            <p className="home-carousel-desc">
+                              {photo.description}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="carousel-controls-bar">
-                <CarouselPrevious />
-                <CarouselNext />
-              </div>
-            </Carousel>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="carousel-controls-bar">
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </div>
+              </Carousel>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 3. What is GeeksforGeeks Campus Body? (Minimalist Official Layout) */}
       <section className="about-minimal-section">
