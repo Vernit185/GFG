@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import MovingHandsVideo from '../components/MovingHandsVideo';
+import ClassroomVideo from '../components/ClassroomVideo';
 import './About.css';
 
 export default function About() {
+  const card2Ref = useRef(null);
 
 
   return (
@@ -51,7 +53,7 @@ export default function About() {
           </div>
 
           <div className="link left">
-            <article className="card">
+            <article className="card" ref={card2Ref}>
               <h3>Technical Workshops &amp; Training</h3>
               <p>Delivering immersive hands-on workshops on modern frameworks, emerging tech stacks, AI/ML tools, and cloud infrastructure to make students industry-ready.</p>
               <p className="sprints-label">Key Initiatives &amp; Sprints:</p>
@@ -63,7 +65,9 @@ export default function About() {
               </ul>
             </article>
             <div className="node">2</div>
-            <div className="spacer"></div>
+            <div className="video-slot classroom-slot">
+              <ClassroomVideo cardRef={card2Ref} />
+            </div>
           </div>
 
           <div className="link right">
