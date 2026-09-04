@@ -107,9 +107,9 @@ export const teamTiers = [
         image: "https://res.cloudinary.com/dvkwaq6y/image/upload/v1788426390/Team%20Members/team_parth_bendre.jpg",
         avatarBg: "#4f46e5",
         initials: "PB",
-        linkedin: "https://linkedin.com/in/siddhika-pujari",
-        github: "https://github.com",
-        instagram: "https://instagram.com"
+        linkedin: "https://www.linkedin.com/in/parth-bendre-732abb32a/",
+        github: "https://github.com/Parth-404",
+        instagram: "https://www.instagram.com/paaarth.bendre/"
       }
     ]
   }

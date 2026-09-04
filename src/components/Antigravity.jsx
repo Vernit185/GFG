@@ -4,7 +4,7 @@ import * as THREE from 'three';
 
 const AntigravityInner = ({
   count = 300,
-  magnetRadius = 10,
+  magnetRadius = 1,
   ringRadius = 10,
   waveSpeed = 0.4,
   waveAmplitude = 1,
