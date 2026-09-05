@@ -12,7 +12,7 @@ export const teamTiers = [
         avatarBg: "#2f9e44",
         initials: "HL",
         linkedin: "https://in.linkedin.com/in/harshh-lal",
-        github: " https://github.com/Harshh-Lal",
+        github: "https://github.com/Harshh-Lal",
         instagram: "https://www.instagram.com/harshh_lal?igsi=aGt5ejQ4bTEzdDk4"
       },
       {
@@ -84,7 +84,7 @@ export const teamTiers = [
         avatarBg: "#db2777",
         initials: "VD",
         linkedin: "https://www.linkedin.com/in/ved-dhapodkar-8837b4293",
-        github: " https://github.com/Ved-221",
+        github: "https://github.com/Ved-221",
         instagram: "https://www.instagram.com/ved_dh?igsi=MTA4YW5jcjZlOWg0cg=="
       },
       {
@@ -95,9 +95,9 @@ export const teamTiers = [
         image: "https://res.cloudinary.com/dvkwaq6y/image/upload/v1788426388/Team%20Members/team_anuska_misra.jpg",
         avatarBg: "#ea580c",
         initials: "AM",
-        linkedin: " https://www.linkedin.com/in/anuska-misra-675b85370",
-        github: " https://github.com/anuska3006",
-        instagram: "https://instagram.comhttps://www.instagram.com/anuska0611?igsi=MWwzb3g0bnR5MDc4Zw=="
+        linkedin: "https://www.linkedin.com/in/anuska-misra-675b85370",
+        github: "https://github.com/anuska3006",
+        instagram: "https://www.instagram.com/anuska0611?igsi=MWwzb3g0bnR5MDc4Zw=="
       },
       {
         id: 8,

@@ -5,29 +5,31 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Read .env
-const envPath = path.resolve(__dirname, '../.env');
-if (!fs.existsSync(envPath)) {
-  console.error('.env file not found!');
-  process.exit(1);
-}
+// Read environment variables (supports CI/CD like Vercel and local .env)
+const env = { ...process.env };
 
-const envContent = fs.readFileSync(envPath, 'utf8');
-const env = {};
-envContent.split('\n').forEach(line => {
-  const [key, ...rest] = line.trim().split('=');
-  if (key && rest.length) {
-    env[key.trim()] = rest.join('=').trim().replace(/^["']|["']$/g, '');
+const envPath = path.resolve(__dirname, '../.env');
+if (fs.existsSync(envPath)) {
+  try {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+      const [key, ...rest] = line.trim().split('=');
+      if (key && rest.length) {
+        env[key.trim()] = rest.join('=').trim().replace(/^["']|["']$/g, '');
+      }
+    });
+  } catch (e) {
+    console.warn('Could not read .env file:', e.message);
   }
-});
+}
 
 const cloudName = env.CLOUDINARY_CLOUD_NAME;
 const apiKey = env.CLOUDINARY_API;
 const apiSecret = env.CLOUDINARY_SECRET;
 
 if (!cloudName || !apiKey || !apiSecret) {
-  console.error('Missing Cloudinary credentials in .env!');
-  process.exit(1);
+  console.log('ℹ️ Cloudinary credentials not provided. Skipping live sync and using existing cached asset data.');
+  process.exit(0);
 }
 
 console.log(`📡 Connecting to Cloudinary (${cloudName})...`);
@@ -287,10 +289,10 @@ export const aboutAssets = {
     id: 1,
     category: 'Hackathon',
     title: 'HACK MATRIX 5.0',
-    description: '',
+    description: "PCCOE's flagship national hackathon bringing together innovative student developers and problem solvers to build real-world solutions.",
     date: 'Oct 10, 2026',
     location: 'New Reading Hall / Architecture Hall PCCOE',
-    registrationLink: '#',
+    registrationLink: 'https://hackmatrix.pccoeaimsa.in',
   }
 ];`;
 
@@ -324,4 +326,8 @@ export const pastHighlights = ${formattedHighlights};
   console.log('\n🎉 Cloudinary assets successfully synchronized!');
 }
 
-sync();
+sync().catch(err => {
+  console.warn('⚠️ Cloudinary sync encountered an error:', err.message);
+  console.log('Continuing build with existing cached assets...');
+  process.exit(0);
+});

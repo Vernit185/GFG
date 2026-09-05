@@ -37,7 +37,7 @@ export default function Events() {
           <i className="bx bx-x"></i>
         </button>
         <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-          <Carousel 
+          <Carousel
             opts={{ startIndex: lightboxData.startIndex, loop: true }}
             className="lightbox-carousel"
           >
@@ -108,8 +108,8 @@ export default function Events() {
           <div className="timeline-container glass-card">
             <div className="timeline-track">
               {highlights.map((highlight) => (
-                <div 
-                  key={highlight.id} 
+                <div
+                  key={highlight.id}
                   className={`timeline-item ${highlight.images && highlight.images.length > 0 ? 'has-carousel' : 'no-carousel'}`}
                 >
                   <div className="timeline-dot"></div>
@@ -123,8 +123,8 @@ export default function Events() {
                         <CarouselContent>
                           {highlight.images.map((img, idx) => (
                             <CarouselItem key={idx} className="event-carousel-slide">
-                              <div 
-                                className="carousel-img-wrapper soft-bloom" 
+                              <div
+                                className="carousel-img-wrapper soft-bloom"
                                 onClick={() => openLightbox(highlight, idx)}
                                 style={{ cursor: 'pointer' }}
                               >
