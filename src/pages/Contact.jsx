@@ -69,7 +69,7 @@ export default function Contact() {
         <div className="container text-center">
           <span className="badge-green">Get in Touch</span>
           <h1 className="contact-main-title">
-            Want to know more about <span className="text-highlight">GeeksforGeeks PCCOE</span>?
+            Want to know more about <span className="text-highlight">GeeksforGeeks</span> PCCOE?
           </h1>
           <p className="contact-header-desc">
             Follow us on our official handles to stay up to date with ongoing hackathons,

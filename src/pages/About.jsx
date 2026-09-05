@@ -11,9 +11,18 @@ export default function About() {
 
   return (
     <div className="about-page-container">
-      <div className="hero">
-        <p>Empowering the next generation of engineers, builders, and problem solvers at Pimpri Chinchwad College of Engineering with state-of-the-art technical exposure.</p>
-      </div>
+      {/* Hero Section */}
+      <section className="about-hero-section">
+        <div className="container text-center">
+          <span className="badge-green">Who We Are</span>
+          <h1 className="about-main-title">
+            About <span className="text-highlight">GeeksforGeeks</span> PCCOE
+          </h1>
+          <p className="about-hero-desc">
+            Empowering the next generation of engineers, builders, and problem solvers at Pimpri Chinchwad College of Engineering with state-of-the-art technical exposure.
+          </p>
+        </div>
+      </section>
 
       <div className="wrap">
         <div className="sidebar">

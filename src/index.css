@@ -165,6 +165,25 @@ select {
   box-shadow: var(--shadow-md);
 }
 
+.btn-outline {
+  background: transparent;
+  color: var(--primary-green);
+  border: 1.5px solid var(--primary-green);
+}
+
+.btn-outline:hover {
+  background: var(--primary-green);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(47, 158, 68, 0.25);
+}
+
+/* Core Brand Text Highlight Utility */
+.text-highlight {
+  color: var(--primary-green);
+  position: relative;
+}
+
 /* Glassmorphism panel */
 .glass-card {
   background: rgba(255, 255, 255, 0.92);
