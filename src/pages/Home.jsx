@@ -23,7 +23,9 @@ export default function Home() {
           <div className="hero-logo-wrapper">
             <img src="/gfg-logo.png" alt="GeeksforGeeks Logo" className="hero-main-logo gfg-logo" decoding="async" />
             <span className="hero-logo-cross">X</span>
-            <img src="/PCCOE-logo.png" alt="PCCOE Logo" className="hero-main-logo pccoe-logo" decoding="async" />
+            <a href="https://www.pccoepune.com" target="_blank" rel="noopener noreferrer">
+              <img src="/PCCOE-logo.png" alt="PCCOE Logo" className="hero-main-logo pccoe-logo" decoding="async" />
+            </a>
           </div>
 
           <h1 className="hero-title">

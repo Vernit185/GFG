@@ -1,9 +1,11 @@
 .contact-page {
   padding-top: var(--nav-height);
+  overflow-x: hidden;
 }
 
 .contact-header-section {
   padding: 3.5rem 0 2rem;
+  text-align: center;
 }
 
 .contact-main-title {
@@ -11,6 +13,7 @@
   font-weight: 800;
   margin: 0.8rem 0 0.5rem;
   line-height: 1.2;
+  text-align: center;
 }
 
 .contact-header-desc {
@@ -18,6 +21,7 @@
   color: var(--text-muted);
   max-width: 680px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .contact-channels-section {
@@ -63,7 +67,7 @@
 }
 
 .channel-card:hover {
-  transform: translateX(6px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
 
@@ -190,6 +194,7 @@
 
 .form-card-header {
   margin-bottom: 2.5rem;
+  text-align: center;
 }
 
 .form-title {
@@ -204,6 +209,7 @@
   color: var(--text-muted);
   max-width: 600px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .success-banner {
@@ -272,6 +278,7 @@
   color: var(--text-main);
   transition: all 0.25s ease;
   outline: none;
+  width: 100%;
 }
 
 .form-group input:focus,
@@ -288,35 +295,205 @@
   margin-top: 0.8rem;
 }
 
+/* Tablet Layout (<= 900px) */
 @media (max-width: 900px) {
   .channels-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 
   .form-row {
     grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
 
   .form-card {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 2rem;
   }
 }
 
+/* Mobile Devices (<= 768px) */
 @media (max-width: 768px) {
-  .contact-main-title {
-    font-size: 2.2rem;
+  .contact-header-section {
+    padding: 2.25rem 1rem 1rem;
+    text-align: center;
   }
 
-  .contact-header-section {
-    padding: 2rem 1rem 1rem;
+  .contact-main-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .contact-header-desc {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .contact-channels-section {
+    padding: 1.5rem 0 2rem;
+  }
+
+  .channels-grid {
+    gap: 2rem;
+  }
+
+  .social-cards-wrapper {
+    text-align: center;
+  }
+
+  .channel-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .channel-subtitle {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .channel-card {
+    padding: 1rem 1.25rem;
+  }
+
+  .channel-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .map-wrapper {
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .map-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .map-header-icon {
+    margin: 0 auto;
+  }
+
+  .map-header h3 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .map-header p {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .map-frame-container {
+    height: 240px;
+  }
+
+  .contact-form-section {
+    padding: 1.5rem 0 3rem;
+  }
+
+  .form-card {
+    padding: 2rem 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  .form-card-header {
+    margin-bottom: 1.75rem;
+    text-align: center;
   }
 
   .form-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .form-desc {
+    font-size: 0.92rem;
+    text-align: center;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px;
+    padding: 0.8rem 1rem;
   }
 
   .form-submit-btn {
     width: 100%;
     justify-content: center;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Small Phones (<= 480px) */
+@media (max-width: 480px) {
+  .contact-header-section {
+    padding: 1.75rem 0.75rem 0.75rem;
+  }
+
+  .contact-main-title {
+    font-size: 1.75rem;
+  }
+
+  .contact-header-desc {
+    font-size: 0.875rem;
+  }
+
+  .contact-channels-section {
+    padding: 1rem 0 1.75rem;
+  }
+
+  .channel-title {
+    font-size: 1.35rem;
+  }
+
+  .channel-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .channel-card {
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .channel-icon-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  .channel-info h3 {
+    font-size: 0.98rem;
+  }
+
+  .channel-info p {
+    font-size: 0.78rem;
+  }
+
+  .map-wrapper {
+    padding: 1rem;
+  }
+
+  .map-frame-container {
+    height: 200px;
+  }
+
+  .contact-form-section {
+    padding: 1rem 0 2.5rem;
+  }
+
+  .form-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .form-title {
+    font-size: 1.4rem;
+  }
+
+  .form-desc {
+    font-size: 0.85rem;
   }
 }

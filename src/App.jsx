@@ -62,7 +62,7 @@ export default function App() {
       <ScrollToTop />
 
       {/* Global Antigravity Background */}
-      <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1, pointerEvents: 'none', opacity: isMobile ? 0.3 : 0.6 }}>
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1, pointerEvents: 'none', opacity: isMobile ? 0.3 : 0.6 }}>
         <Antigravity
           count={isMobile ? 450 : 1200}
           magnetRadius={8}

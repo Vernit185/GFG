@@ -115,6 +115,10 @@ select {
   margin-bottom: 0.75rem;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .badge-glow {
   /* Removed glow for professional look */
 }
