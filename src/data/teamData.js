@@ -5,18 +5,6 @@ export const teamTiers = [
     members: [
       {
         id: 1,
-        name: "HARSH LAL",
-        role: "President",
-        department: "Computer Engineering",
-        image: "https://res.cloudinary.com/dvkwaq6y/image/upload/v1788426382/Team%20Members/team_harsh_lal.jpg",
-        avatarBg: "#2f9e44",
-        initials: "HL",
-        linkedin: "https://in.linkedin.com/in/harshh-lal",
-        github: "https://github.com/Harshh-Lal",
-        instagram: "https://www.instagram.com/harshh_lal?igsi=aGt5ejQ4bTEzdDk4"
-      },
-      {
-        id: 2,
         name: "SAISH WALAVALKAR",
         role: "President",
         department: "Information Technology",
@@ -26,6 +14,18 @@ export const teamTiers = [
         linkedin: "https://www.linkedin.com/in/saish-walavalkar-3ab869336/",
         github: "https://github.com/Saishhh02",
         instagram: "https://www.instagram.com/saish_walavalkar/"
+      },
+      {
+        id: 2,
+        name: "HARSH LAL",
+        role: "President",
+        department: "Computer Engineering",
+        image: "https://res.cloudinary.com/dvkwaq6y/image/upload/v1788426382/Team%20Members/team_harsh_lal.jpg",
+        avatarBg: "#2f9e44",
+        initials: "HL",
+        linkedin: "https://in.linkedin.com/in/harshh-lal",
+        github: "https://github.com/Harshh-Lal",
+        instagram: "https://www.instagram.com/harshh_lal?igsi=aGt5ejQ4bTEzdDk4"
       }
     ]
   },
