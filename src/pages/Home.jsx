@@ -9,7 +9,6 @@ import {
 } from '../components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { galleryPhotos } from '../data/galleryData';
-import { homeCarouselConfig } from '../data/galleryConfig';
 import { useCloudinaryHome } from '../hooks/useCloudinary';
 import './Home.css';
 
@@ -22,9 +21,9 @@ export default function Home() {
         <div className="container hero-centered-container">
           {/* Chapter Official Logo */}
           <div className="hero-logo-wrapper">
-            <img src="/gfg-logo.png" alt="GeeksforGeeks Logo" className="hero-main-logo gfg-logo" />
+            <img src="/gfg-logo.png" alt="GeeksforGeeks Logo" className="hero-main-logo gfg-logo" decoding="async" />
             <span className="hero-logo-cross">X</span>
-            <img src="/PCCOE-logo.png" alt="PCCOE Logo" className="hero-main-logo pccoe-logo" />
+            <img src="/PCCOE-logo.png" alt="PCCOE Logo" className="hero-main-logo pccoe-logo" decoding="async" />
           </div>
 
           <h1 className="hero-title">
@@ -42,7 +41,7 @@ export default function Home() {
           </p>
 
           <div className="hero-actions">
-            <Link to="/hackmatrix" className="btn btn-secondary">
+            <Link to="/events" className="btn btn-secondary">
               <i className="bx bx-code-block"></i>
               <span>Explore Our Events</span>
             </Link>
@@ -71,7 +70,7 @@ export default function Home() {
                 plugins={[
                   Autoplay({
                     delay: 3500,
-                    stopOnInteraction: true
+                    stopOnInteraction: false
                   })
                 ]}
                 className="w-full"
@@ -83,12 +82,12 @@ export default function Home() {
                         <img
                           src={photo.image}
                           alt={photo.title}
+                          loading="lazy"
+                          decoding="async"
                           className="home-carousel-img"
                         />
                         <div className="home-carousel-overlay">
-                          <span className="badge-green home-carousel-badge">
-                            {photo.category || homeCarouselConfig.category || 'Featured'} • {photo.date || homeCarouselConfig.dateText || `${homeCarouselConfig.month} ${homeCarouselConfig.year}`}
-                          </span>
+
                           <h3 className="home-carousel-title">
                             {photo.title}
                           </h3>
@@ -136,6 +135,8 @@ export default function Home() {
               <img
                 src="/about-illustration.png"
                 alt="About GeeksforGeeks Campus Body"
+                loading="lazy"
+                decoding="async"
                 className="about-minimal-img"
               />
             </div>

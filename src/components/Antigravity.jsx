@@ -80,6 +80,7 @@ const AntigravityInner = ({
   }, [count, viewport.width, viewport.height]);
 
   useFrame(state => {
+    if (typeof document !== 'undefined' && document.hidden) return;
     const mesh = meshRef.current;
     if (!mesh) return;
 
@@ -163,7 +164,7 @@ const AntigravityInner = ({
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
       {particleShape === 'capsule' && <capsuleGeometry args={[0.1, 0.4, 4, 8]} />}
-      {particleShape === 'sphere' && <sphereGeometry args={[0.2, 16, 16]} />}
+      {particleShape === 'sphere' && <sphereGeometry args={[0.2, 8, 8]} />}
       {particleShape === 'box' && <boxGeometry args={[0.3, 0.3, 0.3]} />}
       {particleShape === 'tetrahedron' && <tetrahedronGeometry args={[0.3]} />}
       <meshBasicMaterial color={color} />
@@ -173,7 +174,11 @@ const AntigravityInner = ({
 
 const Antigravity = props => {
   return (
-    <Canvas camera={{ position: [0, 0, 50], fov: 35 }}>
+    <Canvas 
+      camera={{ position: [0, 0, 50], fov: 35 }}
+      dpr={[1, 1.5]}
+      gl={{ powerPreference: 'high-performance', antialias: false }}
+    >
       <AntigravityInner {...props} />
     </Canvas>
   );

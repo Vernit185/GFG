@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import gfgEmblem from '../assets/gfg-emblem.png';
 import './Footer.css';
 
 export default function Footer() {

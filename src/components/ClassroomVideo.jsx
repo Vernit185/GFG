@@ -36,7 +36,11 @@ export default function ClassroomVideo({ cardRef, src, alt = 'Domain visual' }) 
       }
     };
 
-    const handlePointerMove = (e) => {
+    let ticking = false;
+    let latestE = null;
+    let rafId = null;
+
+    const checkProximity = (clientX, clientY) => {
       const cardEl = cardRef?.current;
       const videoEl = containerRef.current;
       if (!videoRef.current) return;
@@ -44,8 +48,8 @@ export default function ClassroomVideo({ cardRef, src, alt = 'Domain visual' }) 
       let nearCard = false;
       if (cardEl) {
         const rect = cardEl.getBoundingClientRect();
-        const dx = Math.max(rect.left - e.clientX, 0, e.clientX - rect.right);
-        const dy = Math.max(rect.top - e.clientY, 0, e.clientY - rect.bottom);
+        const dx = Math.max(rect.left - clientX, 0, clientX - rect.right);
+        const dy = Math.max(rect.top - clientY, 0, clientY - rect.bottom);
         if (Math.sqrt(dx * dx + dy * dy) < PROXIMITY_THRESHOLD) {
           nearCard = true;
         }
@@ -54,8 +58,8 @@ export default function ClassroomVideo({ cardRef, src, alt = 'Domain visual' }) 
       let nearVideo = false;
       if (videoEl) {
         const rect = videoEl.getBoundingClientRect();
-        const dx = Math.max(rect.left - e.clientX, 0, e.clientX - rect.right);
-        const dy = Math.max(rect.top - e.clientY, 0, e.clientY - rect.bottom);
+        const dx = Math.max(rect.left - clientX, 0, clientX - rect.right);
+        const dy = Math.max(rect.top - clientY, 0, clientY - rect.bottom);
         if (Math.sqrt(dx * dx + dy * dy) < PROXIMITY_THRESHOLD) {
           nearVideo = true;
         }
@@ -65,6 +69,19 @@ export default function ClassroomVideo({ cardRef, src, alt = 'Domain visual' }) 
         playVideo();
       } else {
         pauseVideo();
+      }
+    };
+
+    const handlePointerMove = (e) => {
+      latestE = { clientX: e.clientX, clientY: e.clientY };
+      if (!ticking) {
+        ticking = true;
+        rafId = requestAnimationFrame(() => {
+          if (latestE) {
+            checkProximity(latestE.clientX, latestE.clientY);
+          }
+          ticking = false;
+        });
       }
     };
 
@@ -98,6 +115,9 @@ export default function ClassroomVideo({ cardRef, src, alt = 'Domain visual' }) 
 
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
       if (cardEl) {
         cardEl.removeEventListener('mouseenter', playVideo);
         cardEl.removeEventListener('mouseleave', pauseVideo);

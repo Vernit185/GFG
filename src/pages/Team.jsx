@@ -34,7 +34,13 @@ export default function Team() {
                 {tier.members.map((member) => (
                   <div key={member.id} className="team-card glass-card">
                     <div className="team-card-image-box">
-                      <img src={member.image} alt={member.name} className="team-photo" />
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        loading="lazy"
+                        decoding="async"
+                        className="team-photo"
+                      />
                     </div>
 
                     <div className="team-card-info text-center">

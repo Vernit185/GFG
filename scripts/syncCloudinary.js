@@ -115,20 +115,33 @@ async function sync() {
     }
   } catch (e) {}
 
+  let existingPhotos = [];
+  try {
+    const galleryDataCode = fs.readFileSync(path.resolve(__dirname, '../src/data/galleryData.js'), 'utf8');
+    const match = galleryDataCode.match(/export const galleryPhotos = (\[[\s\S]*?\]);/);
+    if (match) {
+      existingPhotos = eval(match[1]);
+    }
+  } catch (e) {}
+
   const homePhotos = homeResources
     .filter(r => r.resource_type === 'image')
-    .map((r, index) => ({
-      id: index + 1,
-      title: cleanTitle(r.public_id),
-      category: 'Featured',
-      description: '',
-      image: optimizeUrl(r, 1200),
-      date: configDate || new Date(r.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-    }));
+    .map((r, index) => {
+      const url = optimizeUrl(r, 1200);
+      const existing = existingPhotos.find(p => p.image === url || p.image.includes(r.public_id.split('/').pop()));
+      return {
+        id: index + 1,
+        title: existing && existing.title ? existing.title : cleanTitle(r.public_id),
+        category: 'Featured',
+        description: existing && existing.description ? existing.description : '',
+        image: url,
+        date: configDate || new Date(r.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+      };
+    });
 
   const galleryDataPath = path.resolve(__dirname, '../src/data/galleryData.js');
   const galleryFileContent = `// Automatically generated from Cloudinary 'Home Page' folder
-// Do NOT hardcode generic images. Only genuine assets from Cloudinary are used.
+// Custom titles and descriptions are preserved during sync.
 export { homeCarouselConfig } from './galleryConfig';
 
 export const galleryPhotos = ${JSON.stringify(homePhotos, null, 2)};

@@ -28,7 +28,7 @@ export default function SplashScreen() {
     <div className={`splash-overlay ${fadingOut ? 'splash-fade-out' : ''}`}>
       <div className="splash-content">
         <div className="splash-logo-wrapper">
-          <img src="/logo-small - Copy.png" alt="GeeksforGeeks PCCOE" className="splash-logo-img" />
+          <img src="/logo-small.png" alt="GeeksforGeeks PCCOE" className="splash-logo-img" />
         </div>
         <div className="splash-brand-text">
           <h1 className="splash-title">GeeksforGeeks</h1>

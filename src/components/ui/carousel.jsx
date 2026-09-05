@@ -44,19 +44,37 @@ export const Carousel = React.forwardRef(
       setSelectedIndex(api.selectedScrollSnap());
     }, []);
 
+    const resetAutoplay = useCallback(() => {
+      if (!emblaApi) return;
+      const autoplay = emblaApi.plugins()?.autoplay;
+      if (!autoplay) return;
+
+      if (typeof autoplay.reset === "function") {
+        autoplay.reset();
+      }
+      const isPlaying =
+        typeof autoplay.isPlaying === "function" ? autoplay.isPlaying() : true;
+      if (!isPlaying && typeof autoplay.play === "function") {
+        autoplay.play();
+      }
+    }, [emblaApi]);
+
     const scrollPrev = useCallback(() => {
       emblaApi?.scrollPrev();
-    }, [emblaApi]);
+      resetAutoplay();
+    }, [emblaApi, resetAutoplay]);
 
     const scrollNext = useCallback(() => {
       emblaApi?.scrollNext();
-    }, [emblaApi]);
+      resetAutoplay();
+    }, [emblaApi, resetAutoplay]);
 
     const scrollTo = useCallback(
       (index) => {
         emblaApi?.scrollTo(index);
+        resetAutoplay();
       },
-      [emblaApi]
+      [emblaApi, resetAutoplay]
     );
 
     const handleKeyDown = useCallback(
@@ -104,6 +122,7 @@ export const Carousel = React.forwardRef(
           canScrollNext,
           selectedIndex,
           scrollSnaps,
+          resetAutoplay,
         }}
       >
         <div
@@ -161,8 +180,13 @@ export const CarouselItem = React.forwardRef(
 CarouselItem.displayName = "CarouselItem";
 
 export const CarouselPrevious = React.forwardRef(
-  ({ className = "", ...props }, ref) => {
+  ({ className = "", onClick, ...props }, ref) => {
     const { scrollPrev, canScrollPrev } = useCarousel();
+
+    const handleClick = (event) => {
+      scrollPrev();
+      onClick?.(event);
+    };
 
     return (
       <button
@@ -170,7 +194,7 @@ export const CarouselPrevious = React.forwardRef(
         type="button"
         className={`embla-carousel-btn embla-prev-btn ${className}`}
         disabled={!canScrollPrev}
-        onClick={scrollPrev}
+        onClick={handleClick}
         aria-label="Previous slide"
         {...props}
       >
@@ -184,8 +208,13 @@ export const CarouselPrevious = React.forwardRef(
 CarouselPrevious.displayName = "CarouselPrevious";
 
 export const CarouselNext = React.forwardRef(
-  ({ className = "", ...props }, ref) => {
+  ({ className = "", onClick, ...props }, ref) => {
     const { scrollNext, canScrollNext } = useCarousel();
+
+    const handleClick = (event) => {
+      scrollNext();
+      onClick?.(event);
+    };
 
     return (
       <button
@@ -193,7 +222,7 @@ export const CarouselNext = React.forwardRef(
         type="button"
         className={`embla-carousel-btn embla-next-btn ${className}`}
         disabled={!canScrollNext}
-        onClick={scrollNext}
+        onClick={handleClick}
         aria-label="Next slide"
         {...props}
       >

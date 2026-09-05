@@ -94,5 +94,25 @@ export default defineConfig({
     watch: {
       ignored: ['**/*.mp4', '**/*.mov', '**/*.avi', '**/*.webm', '**/*.mkv']
     }
+  },
+  build: {
+    chunkSizeWarningLimit: 800,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('three') || id.includes('@react-three')) {
+              return 'vendor-three';
+            }
+            if (id.includes('embla-carousel')) {
+              return 'vendor-carousel';
+            }
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor-react';
+            }
+          }
+        }
+      }
+    }
   }
 });

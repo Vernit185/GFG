@@ -30,16 +30,19 @@ export function useCloudinaryHome(initialPhotos = []) {
               ? `${homeCarouselConfig.month} ${homeCarouselConfig.year}` 
               : '');
 
-          const mapped = imageResources.map((r, idx) => ({
-            id: r.id || idx + 1,
-            title: r.title || 'Highlight',
-            category: r.category || homeCarouselConfig.category || 'Featured',
-            description: '',
-            image: r.src,
-            date: defaultDate || (r.createdAt
-              ? new Date(r.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-              : '')
-          }));
+          const mapped = imageResources.map((r, idx) => {
+            const existing = initialPhotos.find(p => p.image === r.src || (r.src && p.image.includes(r.src.split('/').pop())));
+            return {
+              id: r.id || idx + 1,
+              title: existing && existing.title ? existing.title : (r.title || 'Highlight'),
+              category: existing && existing.category ? existing.category : (r.category || homeCarouselConfig.category || 'Featured'),
+              description: existing && existing.description ? existing.description : '',
+              image: r.src,
+              date: defaultDate || (r.createdAt
+                ? new Date(r.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+                : '')
+            };
+          });
           setPhotos(mapped);
         }
       } catch (err) {

@@ -1,15 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Agentation } from 'agentation';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Antigravity from './components/Antigravity';
 import SplashScreen from './components/SplashScreen';
-import Home from './pages/Home';
-import About from './pages/About';
-import Team from './pages/Team';
-import Events from './pages/Events';
-import Contact from './pages/Contact';
+
+// Route code-splitting
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Team = lazy(() => import('./pages/Team'));
+const Events = lazy(() => import('./pages/Events'));
+const Contact = lazy(() => import('./pages/Contact'));
+
+function PageLoader() {
+  return (
+    <div style={{
+      minHeight: '60vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <div style={{
+        width: '36px',
+        height: '36px',
+        border: '3px solid rgba(0, 137, 95, 0.15)',
+        borderTopColor: 'var(--primary-green, #00895f)',
+        borderRadius: '50%',
+        animation: 'routeSpin 0.7s linear infinite'
+      }} />
+      <style>{`@keyframes routeSpin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+}
+
 // ScrollToTop on route change
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -22,7 +46,9 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
 
   React.useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -38,7 +64,7 @@ export default function App() {
       {/* Global Antigravity Background */}
       <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1, pointerEvents: 'none', opacity: isMobile ? 0.3 : 0.6 }}>
         <Antigravity
-          count={isMobile ? 1000 : 2500}
+          count={isMobile ? 450 : 1200}
           magnetRadius={8}
           ringRadius={8}
           waveSpeed={0.05}
@@ -55,15 +81,17 @@ export default function App() {
       <div className="app-layout">
         <Navbar />
         <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* Fallback route */}
-            <Route path="*" element={<Home />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/contact" element={<Contact />} />
+              {/* Fallback route */}
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
         {import.meta.env.DEV && <Agentation />}
