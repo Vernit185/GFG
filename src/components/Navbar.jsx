@@ -55,7 +55,7 @@ export default function Navbar() {
           <NavLink to="/contact" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
             CONTACT
           </NavLink>
-          <a href="https://hackmatrix.pccoeaimsa.in" target="_blank" rel="noopener noreferrer" className="nav-item">
+          <a href="https://hackmatrix.gfgpccoe.in" target="_blank" rel="noopener noreferrer" className="nav-item">
             HACK MATRIX <i className="bx bx-link-external" style={{ fontSize: '0.85em', marginLeft: '4px' }}></i>
           </a>
         </nav>

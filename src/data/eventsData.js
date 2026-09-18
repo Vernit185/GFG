@@ -3,10 +3,10 @@ export const upcomingEvents = [
     id: 1,
     category: 'Hackathon',
     title: 'HACK MATRIX 5.0',
-    description: "PCCOE's flagship national hackathon bringing together innovative student developers and problem solvers to build real-world solutions.",
+    description: '',
     date: 'Oct 10, 2026',
     location: 'New Reading Hall / Architecture Hall PCCOE',
-    registrationLink: 'https://hackmatrix.pccoeaimsa.in',
+    registrationLink: '#',
   }
 ];
 
